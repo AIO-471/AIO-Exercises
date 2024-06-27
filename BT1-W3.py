@@ -18,6 +18,7 @@ output = my_softmax(data)
 assert round ( output [0]. item () , 2) == 0.0
 print(output)
 
+
 class StableMySoftmax(nn.Module):
   def __init__(self):
     super().__init__()
