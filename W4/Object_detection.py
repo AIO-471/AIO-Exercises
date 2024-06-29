@@ -1,12 +1,12 @@
-import streamlit as st
-import numpy as np
-import cv2
-from PIL import Image
+import streamlit as st 
+import numpy as np 
+import cv2 
+from PIL import Image 
 
 
 
-MODEL = r" C:\Users\HP\AIO-Exercises\MobileNetSSD_deploy.caffemodel "
-PROTOTXT = r"C:\Users\HP\AIO-Exercises\MobileNetSSD_deploy.prototxt.txt "
+MODEL = r" C:/Users/HP/AIO-Exercises/MobileNetSSD_deploy.caffemodel "
+PROTOTXT = r"C:/Users/HP/AIO-Exercises/MobileNetSSD_deploy.prototxt.txt "
 
 def process_image ( image ):
     blob = cv2 . dnn . blobFromImage (cv2 . resize ( image , (300 , 300) ) , 0.007843 , (300 , 300) , 127.5)
@@ -22,10 +22,10 @@ def annotate_image (image , detections , confidence_threshold =0.5 ) :
 
         if confidence > confidence_threshold :
 
-            idx = int( detections [0 , 0 , i , 1])
+            int( detections [0 , 0 , i , 1])
             box = detections [0 , 0 , i , 3:7] * np . array ([ w , h , w , h ])
-            ( startX , startY , endX , endY ) = box . astype (" int")
-            cv2 . rectangle ( image , ( startX , startY ) , ( endX , endY ) , 70 , 2)
+            ( x1 , y1 , x2 , y2 ) = box . astype (" int")
+            cv2 . rectangle ( image , ( x1 , y1 ) , ( x2 , y2 ) , 70 , 2)
     return image
 
 st.title("Object Detection for Images")
@@ -37,7 +37,7 @@ if file is not None:
     image = np . array(image)
     detections = process_image(image)
     processed_image = annotate_image(image, detections)
-    st . image(processed_image, caption=" Processed Image ")
+    st.image(processed_image, caption=" Processed Image ")
 
 
 
